@@ -9,5 +9,6 @@ def index():
 
 @app.route('/concept')
 def concept():
-  data = { "image":"lion.jpg","english":"Lion","hindi":"सिंह"}
+  # data = { "image":"lion.jpg","english":"Lion","hindi":"सिंह"}
+  data = { "image":"parrot_small_640px.jpg","english":"Parrot","hindi":"तोता"}
   return render_template('concept.html', data=data)
