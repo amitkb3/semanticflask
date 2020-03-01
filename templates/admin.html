@@ -11,7 +11,9 @@
       1. You need <em>Developer</em> Credentials to create or edit a lesson or card. <br>
       2. <em>Admin</em> Credentials allows create, edit and delete permissions. <br></p>
 
-      <a href="/login"><button class="ui basic green button">Login</button></a>
+      <a href="https://amitkb3.auth0.com/authorize?audience=learn&response_type=token&client_id=BKhBidil6pBe33LpP5fWMm33xvrg7xGx&redirect_uri=http://localhost:5000/admin"><button class="ui basic green button">Login</button></a>
+      &nbsp;
+      <a onclick="logOut()"><button class="ui basic red button">Logout</button></a>      
 </div>
 
 
@@ -59,4 +61,25 @@
   <input class="ui red button" type="submit" value="Delete Card">
 </form>
 {% endblock%}
+
+{% block scripts %} 
+    <script>
+      //Successful Auth/login
+      // Save token to Local Storage
+      let tokenUrl = window.location.hash.substr(1).split('&')[0].split('=');
+      if ( tokenUrl[0] === 'access_token' ) {
+        console.log(tokenUrl[1])
+        // add the access token to the jwt
+        let token = tokenUrl[1];
+        // save jwts to localstore
+        localStorage.setItem('token', token);
+      }
+      // logout
+      const logOut = () => {
+        localStorage.clear()
+        window.location.href = 'https://amitkb3.auth0.com/v2/logout?client_id=BKhBidil6pBe33LpP5fWMm33xvrg7xGx&returnTo=http://localhost:5000'               
+      };
+    </script>
+{% endblock %} 
+
 

@@ -5,7 +5,7 @@ from config import Config
 from werkzeug.exceptions import HTTPException
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from authlib.flask.client import OAuth
+# from authlib.flask.client import OAuth
 from auth import AuthError, requires_auth
 
 app = Flask(__name__)
@@ -13,19 +13,19 @@ app.config.from_object(Config)
 CORS(app, resources={r"/*": {"origins": "*"}})
 db = SQLAlchemy(app)
 
-oauth = OAuth(app)
+# oauth = OAuth(app)
 
-auth0 = oauth.register(
-    'auth0',
-    client_id='BKhBidil6pBe33LpP5fWMm33xvrg7xGx',
-    client_secret='QcPQ98FjRlYx156ZNT_jy7pEqjqtMpwfCzT7A3Zhe9FcL2hcNJOOd7UzKRCKYPc-',
-    api_base_url='https://amitkb3.auth0.com',
-    access_token_url= 'https://amitkb3.auth0.com/oauth/token',
-    authorize_url= 'https://amitkb3.auth0.com/authorize',
-    client_kwargs={
-        'scope': 'openid profile',
-    },
-)
+# auth0 = oauth.register(
+#     'auth0',
+#     client_id='BKhBidil6pBe33LpP5fWMm33xvrg7xGx',
+#     client_secret='QcPQ98FjRlYx156ZNT_jy7pEqjqtMpwfCzT7A3Zhe9FcL2hcNJOOd7UzKRCKYPc-',
+#     api_base_url='https://amitkb3.auth0.com',
+#     access_token_url= 'https://amitkb3.auth0.com/oauth/token',
+#     authorize_url= 'https://amitkb3.auth0.com/authorize',
+#     client_kwargs={
+#         'scope': 'openid profile',
+#     },
+# )
 
 from models import Lesson, Card
 
@@ -38,20 +38,20 @@ def after_request(response):
                          'GET,PUT,POST,DELETE,OPTIONS')
     return response
 
-@app.route('/login')
-def login():
-    return auth0.authorize_redirect(
-        redirect_uri='http://localhost:5000/callback',
-        audience='learn'
-    )
+# @app.route('/login')
+# def login():
+#     return auth0.authorize_redirect(
+#         redirect_uri='http://localhost:5000/callback',
+#         audience='learn'
+#     )
 
-@app.route('/callback')
-def callback():
-    auth0.authorize_access_token()
-    resp = auth0.get('userinfo')
-    userinfo = resp.json()
-    print(userinfo)
-    return 'Calback'
+# @app.route('/callback')
+# def callback():
+#     auth0.authorize_access_token()
+#     resp = auth0.get('userinfo')
+#     userinfo = resp.json()
+#     print(userinfo)
+#     return 'Calback'
 
 @app.route('/healthy')
 def healthy():
