@@ -1,15 +1,38 @@
 <!doctype html>
   <head>
     <meta charset="utf-8">
-    <title>Semantic Flask</title>
+    <title>LearnWorld</title>
 
     <!--style-->
     <link type="text/css" rel="stylesheet" href="/static/css/semantic.min.css">
   </head>
   <body>
     <div class="ui container">
+      <div class="ui menu">
+        <div class="header item">
+          LearnWorld          
+        </div>       
+        <a class="item" href="/index">Lessons</a>
+        <a class="item" href="/admin">Admin</a>       
+      </div>
+      <hr>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>
+              <div class="ui message">
+                <i class="close icon delete-button"></i>
+                {{ message }}
+              </div>
+            </li>            
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
       {% block content %}{% endblock %}
-    </div>
-
+    </div>      
   </body>
 </html>
+{% block scripts %} 
+{% endblock %} 

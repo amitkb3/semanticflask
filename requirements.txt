@@ -1,0 +1,13 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-Script
+psycopg2-binary
+Flask-WTF
+Flask-Cors
+pycodestyle
+autopep8
+python-jose
+authlib
+six
+requests
